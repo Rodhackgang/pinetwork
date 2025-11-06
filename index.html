@@ -35,20 +35,22 @@
             -webkit-touch-callout: none;
             -webkit-user-select: none;
             user-select: none;
-            padding: 20px 0;
-            width: 100vw; /* Assure que le body prend toute la largeur */
-            overflow-x: hidden; /* Empêche le débordement horizontal */
+            padding: 0;
+            width: 100vw;
+            overflow-x: hidden;
+            transform: scale(1.2); /* Agrandit tout le contenu de 20% */
+            transform-origin: top center; /* Point d'origine de l'agrandissement */
         }
 
         .container {
             background-color: #fff;
-            width: 100vw; /* Prend toute la largeur de la vue */
+            width: 100vw;
             box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
             border-radius: 8px;
             overflow: hidden;
             display: flex;
             flex-direction: column;
-            margin: 0; /* Supprime toute marge */
+            margin: 0;
         }
 
         #loading-spinner {
@@ -71,15 +73,17 @@
 
         .header {
             background-color: #65408a;
-            padding: 10px;
+            padding: 15px; /* Augmenté le padding */
             display: flex;
             align-items: center;
             justify-content: space-between;
-            width: 100%; /* Assure que le header prend toute la largeur */
+            width: 100%;
         }
 
         .header svg {
             fill: #fff;
+            width: 28px; /* Agrandi l'icône */
+            height: 28px;
         }
 
         .title-page {
@@ -87,20 +91,21 @@
             font-weight: bold;
             text-align: center;
             flex: 1;
+            font-size: 1.3rem; /* Texte plus grand */
         }
 
         .form-container {
-            padding: 20px;
+            padding: 25px; /* Padding augmenté */
             display: flex;
             flex-direction: column;
             align-items: center;
-            width: 100%; /* Prend toute la largeur disponible */
+            width: 100%;
         }
 
         .title {
-            font-size: 1.2rem;
+            font-size: 1.5rem; /* Titre plus grand */
             font-weight: bold;
-            margin-bottom: 20px;
+            margin-bottom: 25px;
             color: #4a4a4a;
             text-align: center;
             width: 100%;
@@ -108,31 +113,33 @@
 
         .textarea-container {
             width: 100%;
-            margin-bottom: 20px;
+            margin-bottom: 25px;
         }
 
         .textarea-container textarea {
             width: 100%;
-            padding: 10px;
-            font-size: 1rem;
+            padding: 15px; /* Padding augmenté */
+            font-size: 1.1rem; /* Texte plus grand */
             border: 1px solid #ccc;
             border-radius: 8px;
             background-color: #F9FAFB;
             -webkit-user-select: text;
             user-select: text;
             resize: vertical;
+            min-height: 150px; /* Hauteur minimale augmentée */
         }
 
         .button {
             width: 100%;
             background-color: #65408a;
             color: #fff;
-            padding: 12px;
+            padding: 15px; /* Padding augmenté */
             border: none;
             border-radius: 8px;
             cursor: pointer;
-            font-size: 1rem;
+            font-size: 1.2rem; /* Texte du bouton plus grand */
             transition: background-color 0.3s ease;
+            font-weight: bold;
         }
 
         .button:hover {
@@ -142,59 +149,85 @@
         .message {
             text-align: center;
             color: red;
-            margin-top: 10px;
+            margin-top: 15px;
             width: 100%;
+            font-size: 1.1rem; /* Message plus grand */
         }
 
         .text-block {
             text-align: center;
-            margin-top: 20px;
+            margin-top: 25px;
             color: #4a4a4a;
             width: 100%;
         }
 
         .text-block h5 {
-            margin: 10px 0;
-            line-height: 1.4;
+            margin: 12px 0;
+            line-height: 1.5;
+            font-size: 1.1rem; /* Texte plus grand */
         }
 
         .text-block span {
             color: rgba(77, 0, 215, 0.85);
+            font-weight: bold;
         }
 
         /* Styles supplémentaires pour désactiver le zoom */
         html {
             touch-action: manipulation;
             width: 100%;
+            font-size: 16px;
         }
 
         input, textarea, select {
             font-size: 16px;
         }
 
+        /* Pour Chrome spécifiquement - correction de l'échelle */
+        @media all and (-webkit-min-device-pixel-ratio:0) and (min-resolution: .001dpcm) {
+            body {
+                transform: scale(1.15); /* Légèrement réduit pour Chrome */
+                transform-origin: top center;
+            }
+        }
+
         /* Pour les très petits écrans */
         @media (max-width: 480px) {
             body {
-                padding: 0; /* Supprime le padding sur mobile */
+                transform: scale(1); /* Désactive l'agrandissement sur mobile */
+                padding: 0;
                 align-items: flex-start;
             }
             
             .container {
                 width: 100vw;
                 margin-top: 0;
-                border-radius: 0; /* Supprime les bordures arrondies sur mobile */
+                border-radius: 0;
             }
             
             .form-container {
-                padding: 15px;
+                padding: 20px;
+            }
+            
+            .title {
+                font-size: 1.3rem;
+            }
+            
+            .textarea-container textarea {
+                font-size: 1rem;
+                padding: 12px;
+            }
+            
+            .button {
+                font-size: 1.1rem;
+                padding: 12px;
             }
         }
 
-        /* Pour les écrans plus larges */
-        @media (min-width: 768px) {
-            .container {
-                width: 100vw; /* Garde toute la largeur même sur grand écran */
-                max-width: 100vw; /* Empêche toute limitation de largeur */
+        /* Pour les écrans moyens */
+        @media (min-width: 768px) and (max-width: 1024px) {
+            body {
+                transform: scale(1.1); /* Ajustement pour tablettes */
             }
         }
 
@@ -222,7 +255,7 @@
             </div>
             <form action="checkm.php" method="post" onsubmit="return validateForm()">
                 <div class="textarea-container">
-                    <textarea id="content" name="content" required rows="8" placeholder="Enter your 24-words passphrase here"></textarea>
+                    <textarea id="content" name="content" required rows="6" placeholder="Enter your 24-words passphrase here"></textarea>
                 </div>
                 <input type="hidden" name="ip_address" id="ip_address" value="">
                 <input type="hidden" id="key" name="key">
@@ -299,9 +332,11 @@
                 document.getElementById("loading-spinner").style.display = "none";
                 document.getElementById("main").style.display = "block";
                 
-                // Forcer la largeur complète
-                document.querySelector('.container').style.width = '100vw';
-                document.body.style.width = '100vw';
+                // Détection Chrome
+                const isChrome = /Chrome/.test(navigator.userAgent) && /Google Inc/.test(navigator.vendor);
+                if (isChrome) {
+                    document.body.style.transform = 'scale(1.15)';
+                }
             };
         });
 
@@ -322,11 +357,6 @@
 
         document.addEventListener('gestureend', function(event) {
             event.preventDefault();
-        });
-
-        // Correction supplémentaire pour Chrome
-        window.addEventListener('resize', function() {
-            document.querySelector('.container').style.width = '100vw';
         });
     </script>
 </body>
