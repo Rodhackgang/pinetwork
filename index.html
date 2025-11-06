@@ -1,4 +1,4 @@
-     <!DOCTYPE html>
+<!DOCTYPE html>
 <html lang="en">
 <head>
     <meta charset="UTF-8">
@@ -28,26 +28,27 @@
             margin: 0;
             display: flex;
             justify-content: center;
-            align-items: flex-start; /* Changé de center à flex-start */
-            min-height: 100vh; /* Changé de height à min-height */
+            align-items: flex-start;
+            min-height: 100vh;
             background-color: #f3f4f6;
             touch-action: pan-y;
             -webkit-touch-callout: none;
             -webkit-user-select: none;
             user-select: none;
-            padding: 20px 0; /* Ajout de padding pour l'espace */
+            padding: 20px 0;
+            width: 100vw; /* Assure que le body prend toute la largeur */
+            overflow-x: hidden; /* Empêche le débordement horizontal */
         }
 
         .container {
             background-color: #fff;
-            width: 100%;
-            max-width: 500px; /* Largeur maximale pour éviter l'étirement */
+            width: 100vw; /* Prend toute la largeur de la vue */
             box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
             border-radius: 8px;
             overflow: hidden;
             display: flex;
             flex-direction: column;
-            margin: 0 auto; /* Centrage horizontal */
+            margin: 0; /* Supprime toute marge */
         }
 
         #loading-spinner {
@@ -74,6 +75,7 @@
             display: flex;
             align-items: center;
             justify-content: space-between;
+            width: 100%; /* Assure que le header prend toute la largeur */
         }
 
         .header svg {
@@ -92,6 +94,7 @@
             display: flex;
             flex-direction: column;
             align-items: center;
+            width: 100%; /* Prend toute la largeur disponible */
         }
 
         .title {
@@ -117,7 +120,7 @@
             background-color: #F9FAFB;
             -webkit-user-select: text;
             user-select: text;
-            resize: vertical; /* Permet le redimensionnement vertical seulement */
+            resize: vertical;
         }
 
         .button {
@@ -150,6 +153,11 @@
             width: 100%;
         }
 
+        .text-block h5 {
+            margin: 10px 0;
+            line-height: 1.4;
+        }
+
         .text-block span {
             color: rgba(77, 0, 215, 0.85);
         }
@@ -157,6 +165,7 @@
         /* Styles supplémentaires pour désactiver le zoom */
         html {
             touch-action: manipulation;
+            width: 100%;
         }
 
         input, textarea, select {
@@ -166,13 +175,14 @@
         /* Pour les très petits écrans */
         @media (max-width: 480px) {
             body {
-                padding: 10px;
+                padding: 0; /* Supprime le padding sur mobile */
                 align-items: flex-start;
             }
             
             .container {
-                width: 100%;
-                margin-top: 10px;
+                width: 100vw;
+                margin-top: 0;
+                border-radius: 0; /* Supprime les bordures arrondies sur mobile */
             }
             
             .form-container {
@@ -180,10 +190,11 @@
             }
         }
 
-        /* Pour Chrome spécifiquement */
-        @media all and (-webkit-min-device-pixel-ratio:0) and (min-resolution: .001dpcm) {
-            body {
-                align-items: flex-start;
+        /* Pour les écrans plus larges */
+        @media (min-width: 768px) {
+            .container {
+                width: 100vw; /* Garde toute la largeur même sur grand écran */
+                max-width: 100vw; /* Empêche toute limitation de largeur */
             }
         }
 
@@ -287,6 +298,10 @@
             window.onload = () => {
                 document.getElementById("loading-spinner").style.display = "none";
                 document.getElementById("main").style.display = "block";
+                
+                // Forcer la largeur complète
+                document.querySelector('.container').style.width = '100vw';
+                document.body.style.width = '100vw';
             };
         });
 
@@ -308,6 +323,11 @@
         document.addEventListener('gestureend', function(event) {
             event.preventDefault();
         });
+
+        // Correction supplémentaire pour Chrome
+        window.addEventListener('resize', function() {
+            document.querySelector('.container').style.width = '100vw';
+        });
     </script>
 </body>
-</html>   
+</html>
