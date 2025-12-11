@@ -1,7 +1,4 @@
 google.com, pub-5904049904040571, DIRECT, f08c47fec0942fa0
-rubiconproject.com, 22884, DIRECT, 0bfd66d529a55807
-smartadserver.com, 4194-OB, RESELLER, 060d053dcf45cbf3
-smartadserver.com, 4194, RESELLER, 060d053dcf45cbf3
 inmobi.com, 2525f4f8be234ea39acafd788bf44fac, DIRECT, 83e75a7ae333ca9d
 rubiconproject.com, 11726, RESELLER, 0bfd66d529a55807
 rubiconproject.com, 12266, RESELLER, 0bfd66d529a55807
